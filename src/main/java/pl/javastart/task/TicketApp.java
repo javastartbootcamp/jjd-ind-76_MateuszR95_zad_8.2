@@ -4,8 +4,11 @@ public class TicketApp {
 
     public static void main(String[] args) {
 
-        Ticket ticket1 = Ticket.createTicket();
-        System.out.println(ticket1.printTicketDetails());
-
+        Ticket online = Ticket.createTicket();
+        Ticket standard = Ticket.createTicket();
+        Ticket gift = Ticket.createTicket();
+        System.out.println(online.printTicketDetails());
+        System.out.println(standard.printTicketDetails());
+        System.out.println(gift.printTicketDetails());
     }
 }

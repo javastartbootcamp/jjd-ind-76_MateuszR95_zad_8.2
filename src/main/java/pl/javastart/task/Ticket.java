@@ -12,6 +12,10 @@ public class Ticket {
     private static int ticketID = 1;
     private int id;
 
+    public static final String ONLINE_TICKET = "Online";
+    public static final String STANDARD_TICKET = "Standard";
+    public static final String GIFT_TICKET = "Gift";
+
     public Ticket(String event, Address address, String type, double basicPrice, double discount) {
         this.event = event;
         this.address = address;
@@ -39,13 +43,16 @@ public class Ticket {
         String type = scanner.nextLine();
 
         if (type.equalsIgnoreCase("Online")) {
+            type = ONLINE_TICKET;
             basicPrice = 100;
             discount = 0.05;
         } else if (type.equalsIgnoreCase("Standard")) {
+            type = STANDARD_TICKET;
             basicPrice = 110;
             discount = 0.05;
         } else if (type.equalsIgnoreCase("Gift")) {
-            basicPrice = 120;
+            type = GIFT_TICKET;
+            basicPrice = 110;
             discount = 0.05;
         }
         return new Ticket(event, address, type, basicPrice, discount);

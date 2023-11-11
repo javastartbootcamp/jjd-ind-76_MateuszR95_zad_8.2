@@ -2,20 +2,24 @@ package pl.javastart.task;
 
 public class PriceCalculator {
 
-    protected static double calculateFinalPrice(Ticket ticket) {
+    private static double LOGISTIC_SERVICE_COST = 5;
+    private static double GIFT_TICKET_INCREASE = 0.05;
+
+    public static double calculateFinalPrice(Ticket ticket) {
         double finalPrice = 0;
 
-        if (ticket.getType().equalsIgnoreCase("online")) {
-            finalPrice = ticket.getBasicPrice() * (1 - ticket.getDiscount());
-        } else if (ticket.getType().equalsIgnoreCase("standard")) {
-            finalPrice = ticket.getBasicPrice() * (1 - ticket.getDiscount()) + 5;
-        } else if (ticket.getType().equalsIgnoreCase("gift")) {
-            finalPrice = ticket.getBasicPrice() * (1 - ticket.getDiscount()) + 5
-                    + 0.05 * (ticket.getBasicPrice() * (1 - ticket.getDiscount()));
-        } else {
-            System.out.println("Podaj prawidłowy typ biletu");
+        switch (ticket.getType()) {
+            case Ticket.ONLINE_TICKET ->
+                    finalPrice = ticket.getBasicPrice() * (1 - ticket.getDiscount());
+            case Ticket.STANDARD_TICKET ->
+                    finalPrice = ticket.getBasicPrice() * (1 - ticket.getDiscount()) + LOGISTIC_SERVICE_COST;
+            case Ticket.GIFT_TICKET ->
+                    finalPrice = ticket.getBasicPrice() * (1 - ticket.getDiscount()) + LOGISTIC_SERVICE_COST
+                            + GIFT_TICKET_INCREASE * (ticket.getBasicPrice() * (1 - ticket.getDiscount()));
+            default -> finalPrice = 0;
         }
-        return finalPrice;
-    }
 
+        return finalPrice;
+
+    }
 }
