@@ -7,8 +7,8 @@ public class Ticket {
     private String event;
     private Address address;
     private String type;
-    private static double basicPrice;
-    private static double discount;
+    private double basicPrice;
+    private double discount;
     private static int ticketID = 1;
     private int id;
 
@@ -16,17 +16,21 @@ public class Ticket {
     public static final String STANDARD_TICKET = "Standard";
     public static final String GIFT_TICKET = "Gift";
 
-    public Ticket(String event, Address address, String type, double basicPrice, double discount) {
+    private Ticket(String event, Address address, String type, double basicPrice, double discount) {
         this.event = event;
         this.address = address;
         this.type = type;
-        Ticket.basicPrice = basicPrice;
-        Ticket.discount = discount;
+        this.basicPrice = basicPrice;
+        this.discount = discount;
         id = ticketID;
         ticketID++;
     }
 
-    public static Ticket createTicket() {
+    public Ticket() {
+
+    }
+
+    public Ticket createTicket() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj wydarzenie, na które chcesz kupić bilet");
         String event = scanner.nextLine();
@@ -48,11 +52,11 @@ public class Ticket {
             discount = 0.05;
         } else if (type.equalsIgnoreCase("Standard")) {
             type = STANDARD_TICKET;
-            basicPrice = 110;
+            basicPrice = 100;
             discount = 0.05;
         } else if (type.equalsIgnoreCase("Gift")) {
             type = GIFT_TICKET;
-            basicPrice = 110;
+            basicPrice = 100;
             discount = 0.05;
         }
         return new Ticket(event, address, type, basicPrice, discount);
@@ -88,7 +92,7 @@ public class Ticket {
     }
 
     private void setBasicPrice(double basicPrice) {
-        Ticket.basicPrice = basicPrice;
+        this.basicPrice = basicPrice;
     }
 
     protected double getDiscount() {
@@ -96,7 +100,7 @@ public class Ticket {
     }
 
     private void setDiscount(double discount) {
-        Ticket.discount = discount;
+        this.discount = discount;
     }
 
     private int getId() {
